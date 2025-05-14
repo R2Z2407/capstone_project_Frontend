@@ -1,0 +1,250 @@
+<!DOCTYPE html>  
+<html lang="id">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>Capstone Project</title>  
+    <link rel="icon" href="Path_Logos.png" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">  
+    <style>  
+        body {  
+            background: linear-gradient(135deg, #d3d3d3, #e5e5e5);  
+            height: 100vh; 
+            display: flex;  
+            justify-content: center;  
+            align-items: center;  
+            font-family: 'Arial', sans-serif;  
+            color: #333;  
+            overflow: hidden;  
+            position: relative; /* Position relative for correct z-index handling */  
+        }  
+        .loader {  
+            width: 80px;  
+            height: 80px;  
+            border: 8px solid rgba(255, 255, 255, 0.8);  
+            border-top: 8px solid rgba(0, 135, 204, 1);  
+            border-radius: 50%;  
+            animation: spin 1.5s linear infinite;  
+            z-index: 2; /* Ensure loader is above content */  
+        }  
+        .loader::before {  
+            content: '';  
+            position: absolute;  
+            top: 50%;  
+            left: 50%;  
+            width: 60%;  
+            height: 60%;  
+            background: rgba(0, 135, 204, 0.3);  
+            border-radius: 50%;  
+            transform: translate(-50%, -50%);  
+            animation: pulse 1.5s ease-in-out infinite;  
+        }  
+        @keyframes spin {  
+            0% { transform: rotate(0deg); }  
+            100% { transform: rotate(360deg); }  
+        }  
+        @keyframes pulse {  
+            0% { transform: translate(-50%, -50%) scale(1); }  
+            50% { transform: translate(-50%, -50%) scale(1.1); }  
+            100% { transform: translate(-50%, -50%) scale(1); }  
+        }  
+        .text {  
+            margin-top: 20px;  
+            font-size: 1.5rem;  
+            text-align: center;  
+            color: #555;  
+            text-shadow: 0 0 10px rgba(0, 135, 204, 0.8);  
+            z-index: 2; /* Ensure text is above content */  
+        }  
+        .content {  
+            display: none; /* Hide content initially until loading is complete */  
+            flex-direction: column;  
+            align-items: center;  
+            justify-content: center;  
+            background-color: white;
+            border-radius: 10px;  
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 50px 30%;
+            height: 100vh; /* Full height for content */
+            width: 100%;
+            position: relative; /* Position relative for child positioning */  
+            z-index: 1; /* Ensure beneath loader */  
+        }  
+        .background-container {  
+            position: fixed;  
+            top: 0;  
+            left: 0;  
+            width: 100%;  
+            height: 100%;  
+            background: url('learning-person.jpg') no-repeat center/cover; /* Replace with your image URL */  
+            filter: blur(5px);  
+            z-index: 0; /* Behind all elements */  
+        }  
+        .welcome-message {  
+            font-size: 3em;  
+            color: black;  
+            animation: move 5s linear infinite;  
+            transition: all 0.5s;  
+        }  
+        .welcome-message:hover {  
+            animation-play-state: paused; /* Stops the animation on hover */  
+        }  
+        @keyframes move {  
+            0% { transform: translateY(0); }  
+            50% { transform: translateY(-20px); }  
+            100% { transform: translateY(0); }  
+        }  
+        .logos {  
+            position: absolute;  
+            top: 20px;  
+            width: 100%;  
+            display: flex;
+            justify-content: space-evenly; 
+            align-items: center;
+            padding: 0 50px;  
+            z-index: 1;  
+        }  
+        .logos img {  
+            height: 50px; /* Adjust the size of logos */  
+        }  
+        .logos img:nth-child(1) {  
+            width: auto;
+            height: 20px;
+        }  
+        .logos img:last-child {  
+            width: auto;
+            height: 70px;
+        } 
+        .website-buttons {  
+            margin-top: 20px;  
+            display: flex;  
+            flex-direction: column;  
+            align-items: center;  
+            transition: opacity 0.5s ease; /* Smooth transition for opacity */  
+        }  
+        .website-button {  
+            background-color: blue;  
+            color: white;  
+            border: none;  
+            border-radius: 5px;  
+            padding: 15px 30px;  
+            font-size: 1.5em;  
+            margin: 10px 0;  
+            cursor: pointer;  
+            overflow: hidden;  
+            transition: background-color 0.3s ease, transform 0.3s ease;  
+            display: inline-block;  
+            z-index: 1; /* Ensure buttons are distinct */  
+        }  
+        .website-button:hover {  
+            background-color: darkblue; /* Color when hovered */  
+        }  
+        .website-button.clicked {  
+            background-color: orange; /* Color when clicked (flame effect) */  
+            transition: background-color 0.3s ease;  
+        }  
+        /* Animation for moving clicked button to center */  
+        .moved {  
+            position: absolute;  
+            top: 50%;  
+            left: 50%;  
+            transform: translate(-50%, -50%);  
+            z-index: 3; /* Bring to front when clicked */  
+            transition: all 0.5s ease; /* Smooth transition */  
+        }  
+        .hidden {  
+            opacity: 0; /* Hide other buttons */  
+            transition: opacity 0.5s ease; /* Smooth transition for hiding */  
+        }  
+    </style>  
+</head>  
+<body>  
+    <div class="background-container"></div> <!-- Background with blur -->  
+
+    <!-- Loader elements -->  
+    <div class="loader"></div>  
+    <div class="text">Sedang memuat, harap tunggu...</div>  
+
+    <!-- Main content, initially hidden -->  
+    <div class="content" id="mainContent">   
+        <div class="logos">  
+            <img src="Coursera_logo.png" alt="Coursera Logo"> <!-- Replace with your logo URL -->  
+            <img src="UM_logo.png" alt="University of Michigan Logo"> <!-- Replace with your logo URL -->  
+        </div>  
+        <div class="welcome-message">Welcome, Friends!</div>
+        <div class="welcome-message">This is my capstone project</div> 
+        <div class="website-buttons" id="buttonContainer">  
+            <button class="website-button" onclick="openWebsite('HW1/index.html', this)">Wireframe</button>  
+            <button class="website-button" onclick="openWebsite('HW2/index.html', this)">Full Code</button>
+        </div>  
+    </div>  
+
+    <script>  
+        // Simulate a loading period, then show main content  
+        setTimeout(() => {  
+            document.querySelector('.loader').style.display = 'none'; // Hide loader  
+            document.querySelector('.text').style.display = 'none'; // Hide loading text  
+            document.getElementById('mainContent').style.display = 'flex'; // Show main content  
+        }, 3000); // Duration of loading in milliseconds  
+
+        const welcomeMessage = document.querySelector('.welcome-message');  
+
+        // Function to pause and resume welcome message animation on hover  
+        welcomeMessage.addEventListener('mouseenter', () => welcomeMessage.style.animationPlayState = 'paused');  
+        welcomeMessage.addEventListener('mouseleave', () => welcomeMessage.style.animationPlayState = 'running');  
+
+        // Function to open the website and animate button  
+        function openWebsite(url, button) {  
+            const buttons = document.querySelectorAll('.website-button');  
+
+            // Set other buttons' styles to hidden  
+            buttons.forEach(btn => {  
+                if (btn !== button) {  
+                    btn.classList.add('hidden'); // Hide other buttons  
+                } else {  
+                    btn.classList.add('clicked'); // Change color to flame effect  
+                    btn.classList.add('moved'); // Move the clicked button to center  
+                }  
+            });  
+
+            // Open the clicked website after a short delay to allow animation to complete  
+            setTimeout(() => {  
+                window.open(url, '_blank'); // Open the website after delay  
+                resetButtons(); // Reset buttons after opening website  
+            }, 300); // Slight delay for the visual effect  
+        }  
+
+        // Function to reset buttons after navigating away  
+        function resetButtons() {  
+            const buttons = document.querySelectorAll('.website-button');  
+            buttons.forEach(btn => {  
+                btn.classList.remove('clicked', 'moved', 'hidden'); // Remove all classes  
+            });  
+        }  
+
+        // Make sure to update the console log capture setup for debugging  
+        window.console = new Proxy(console, {  
+            get(target, prop) {  
+                if (['log', 'warn', 'error'].includes(prop)) {  
+                    return new Proxy(target[prop], {  
+                        apply(fn, thisArg, args) {  
+                            fn.apply(thisArg, args);  
+                            window.parent.postMessage({ action: 'console',   
+                                type: prop,   
+                                args: args.map((arg) => {  
+                                    try {  
+                                        return JSON.stringify(arg).replace(/^["']|["']$/g, '');  
+                                    } catch (e) {  
+                                        return arg;  
+                                    }  
+                                })   
+                            }, '*');  
+                        }  
+                    });  
+                }  
+                return target[prop];  
+            }  
+        });  
+    </script>  
+</body>  
+</html>

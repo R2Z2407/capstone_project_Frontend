@@ -1,0 +1,473 @@
+<!DOCTYPE html>  
+<html lang="id">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>Club Navigation</title>  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">  
+    <style>  
+        * {  
+            box-sizing: border-box;  
+            margin: 0;  
+            padding: 0;  
+        }  
+
+        body {  
+            font-family: Arial, sans-serif;  
+            background-color: #f0f0f0;  
+            scrollbar-width: thin;  
+            scrollbar-color: rgba(0, 0, 0, 0.5) transparent;  
+            line-height: 1.6;  
+        }  
+
+        body::-webkit-scrollbar {  
+            width: 8px;  
+        }  
+
+        body::-webkit-scrollbar-thumb {  
+            background: rgba(0, 0, 0, 0.5);  
+            border-radius: 10px;  
+        }  
+
+        body::-webkit-scrollbar-track {  
+            background: transparent;  
+        }  
+
+        header {  
+            background-color: #cccccc;   
+            position: fixed;  
+            width: 100%;  
+            top: 0;  
+            z-index: 1000;  
+        }  
+        
+        .BG {  
+            background-color: blue;  
+            height: 15vw;  
+        }  
+
+        .logo {  
+            font-size: 24px;  
+            height: 12vw;  
+            width: 12vw;  
+            display: block;  
+            border-radius: 50%;  
+            position: absolute;  
+            top: 6vw;  
+            left: 44%;  
+            text-align: center;  
+            background-color: grey;  
+            color: white;  
+            display: flex;  
+            justify-content: center;  
+            align-items: center;  
+        }  
+
+        span {  
+            height: 4vw;  
+            display: block;  
+        }  
+
+        .burger {  
+            font-size: 30px;  
+            cursor: pointer;  
+            display: block;  
+            margin: 0 auto;  
+            text-align: center;  
+        }  
+
+        nav {  
+            display: none;  
+            background-color: #cccccc;  
+            padding: 10px 0;  
+            text-align: center;  
+        }  
+
+        nav.active {  
+            display: block;  
+        }  
+
+        nav ul {  
+            list-style-type: none;  
+            padding: 0;  
+            margin: 0;  
+        }  
+
+        nav ul li {  
+            padding: 5px 0;  
+        }  
+
+        nav ul li a {  
+            text-decoration: none;  
+            color: #000000;  
+            display: block;  
+            padding: 10px 15px;  
+            transition: all 0.3s ease;  
+        }  
+
+        nav ul li a:hover {  
+            background-color: rgba(0,0,0,0.1);  
+        }  
+
+        nav ul li a.active {  
+            color: #ff0000;  
+            font-weight: bold;  
+            background-color: white;  
+        }  
+
+        section {   
+            padding: 20px;   
+            height: 100vh;  
+            background-color: white;   
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);  
+        }  
+
+        .container {   
+            margin-top: 25vw;  
+            height: calc(100vh - 100px);  
+            overflow-y: auto;  
+            transition: margin-top 0.3s ease;  
+            scrollbar-width: none;  
+            -ms-overflow-style: none;  
+        }  
+
+        .container::-webkit-scrollbar {  
+            display: none;  
+        }  
+
+        @media screen and (max-width: 799px) {  
+            .container {  
+                width: 100%;  
+                flex-direction: column;   
+                transform: translateY(0);   
+                transition: transform 0.3s ease;  
+            }  
+
+            section {  
+                width: 100%;  
+                height: 100vh;   
+                display: block;   
+            }  
+
+            header {  
+                position: fixed;  
+                height: auto;  
+                z-index: 1000;  
+            }  
+
+            .BG {  
+                display: none;   
+            }  
+
+            .logo {  
+                position: static;  
+                margin: 10px auto;  
+                transform: none;  
+            }  
+
+            nav {  
+                display: none;  
+                background-color: #f0f0f0;  
+                width: 100%;  
+            }  
+
+            nav.active {  
+                display: block;  
+            }  
+
+            nav ul {  
+                width: 100%;  
+            }  
+
+            nav ul li {  
+                width: 100%;  
+                text-align: center;  
+            }  
+
+            nav ul li a {  
+                display: block;  
+                padding: 15px;  
+                border-bottom: 1px solid #ddd;  
+            }  
+
+            nav ul li a.active {  
+                background-color: #e0e0e0;  
+                color: red;  
+            }  
+
+            .container {  
+                margin-top: 100px;   
+            }  
+        }  
+
+        @media screen and (min-width: 800px) and (max-width: 1199px) {  
+            body {  
+                overflow-x: hidden;  
+            }  
+
+            .container {  
+                width: 100%;  
+                display: flex;  
+                flex-direction: column;  
+                transform: translateY(0);  
+                transition: transform 0.3s ease;  
+                margin-top: 100px;  
+            }  
+
+            section {  
+                width: 100%;  
+                min-height: 100vh;  
+                display: block;  
+                flex-shrink: 0;  
+                opacity: 1;  
+                visibility: visible;  
+            }  
+        }  
+
+        @media screen and (min-width: 1200px) {  
+            body {  
+                overflow-x: hidden;  
+            }  
+
+            .BG {  
+                height: 10vw;  
+            }  
+
+            .burger {  
+                display: none;  
+            }  
+
+            header {  
+                position: relative;  
+                display: flex;  
+                flex-direction: column;  
+                align-items: center;  
+                height: 25vw;  
+            }  
+
+            .BG {  
+                position: absolute;  
+                top: 0;  
+                left: 0;  
+                width: 100%;  
+                height: 15vw;  
+                background-color: #f0f0f0;  
+                z-index: 1;  
+            }  
+
+            .logo {  
+                position: absolute;  
+                top: 7vw;  
+                left: 50%;  
+                transform: translateX(-50%);  
+                width: 15vw;  
+                height: 15vw;  
+                border-radius: 50%;  
+                background-color: #808080;  
+                display: flex;  
+                justify-content: center;  
+                align-items: center;  
+                z-index: 2;  
+                color: white;  
+                font-weight: bold;  
+                font-size: 2vw;  
+            }  
+
+            nav {  
+                position: absolute;  
+                bottom: -1.3vw;  
+                width: 100%;  
+                display: flex;  
+                justify-content: center;  
+                z-index: 2;  
+                background-color: transparent;  
+            }  
+
+            nav ul {  
+                display: flex;  
+                list-style: none;  
+                padding: 0;  
+                margin: 0;  
+                gap: 5vw;  
+                background-color: transparent;  
+                justify-content: center;  
+                width: 50%;  
+            }  
+
+            nav ul li a {  
+                text-decoration: none;  
+                color: black;  
+                padding: 1vw 2vw;  
+                font-size: 1.2vw;  
+                transition: all 0.3s ease;  
+                background-color: transparent;  
+            }  
+
+            nav ul li a:hover {  
+                background-color: rgba(0,0,0,0.1);  
+            }  
+
+            nav ul li a.active {  
+                background-color: white;  
+                color: red;  
+                border-radius: 2vw 2vw 0 0;  
+                padding: 1vw 2vw;  
+            }    
+
+            .container {  
+                display: flex;  
+                height: calc(100vh - 10vh);  
+                margin-top: 0;  
+                transition: transform 0.5s ease-in-out;  
+                width: 400vw;  
+                overflow-y: hidden;  
+            }  
+
+            section {  
+                width: 100vw;  
+                margin: 0;  
+                padding: 40px;  
+                text-align: center;  
+                display: flex;  
+                flex-direction: column;  
+                justify-content: center;  
+            }  
+        }  
+    </style>  
+</head>  
+<body>  
+    <header>  
+        <div class="BG"></div>  
+        <div class="logo">Club Logo</div>  
+        <span></span>  
+        <div class="burger" id="burger">  
+            <i class="fas fa-bars"></i>  
+        </div>  
+        <nav id="menu">  
+            <ul>  
+                <li><a href="#home">Home</a></li>  
+                <li><a href="#history" class="active">History</a></li>  
+                <li><a href="#team">Team</a></li>  
+                <li><a href="#gallery">Gallery</a></li>  
+            </ul>  
+        </nav>  
+    </header>  
+
+    <div class="container" id="container">  
+        <section id="home">  
+            <h1>Home</h1>  
+            <p>Welcome to our club. Here you can find information about our activities and events.</p>  
+        </section>  
+
+        <section id="history">  
+            <h1>History</h1>  
+            <p>Our club was founded in 2020 with a mission to bring people together through sports.</p>  
+        </section>  
+
+        <section id="team">  
+            <h1>Team</h1>  
+            <p>Meet our passionate team members who make everything possible!</p>  
+        </section>  
+
+        <section id="gallery">  
+            <h1>Gallery</h1>  
+            <p>Check out our photos capturing the best moments of our club!</p>  
+        </section>   
+    </div>   
+
+    <script>  
+        function handleResponsiveNavigation() {  
+            const menuItems = document.querySelectorAll("nav ul li a");  
+            const links = document.querySelectorAll('nav ul li a');  
+            const container = document.querySelector('.container');  
+            let currentSectionIndex = 0;  
+
+            const checkResponsiveMode = () => {  
+                return window.innerWidth < 1200;  
+            };  
+
+            if (!container) {  
+                console.error('Container not found');  
+                return;  
+            }  
+
+            // Reset transform dan styling untuk berbagai mode  
+            container.style.transform = 'none';  
+            container.style.flexDirection = checkResponsiveMode() ? 'column' : 'row';  
+
+            // Inisialisasi aktif untuk History di desktop/mobile  
+            links.forEach(link => link.classList.remove('active'));  
+            document.querySelector('a[href="#history"]').classList.add('active');  
+
+            links.forEach((link, index) => {  
+                // Hapus event listener sebelumnya untuk mencegah duplikasi  
+                link.removeEventListener('click', desktopHandler);  
+                link.removeEventListener('click', mobileHandler);  
+
+                // Tambahkan event listener sesuai mode  
+                link.addEventListener('click', checkResponsiveMode() ? mobileHandler : desktopHandler);  
+                link.setAttribute('data-index', index);  
+            });  
+
+            function mobileHandler(e) {  
+                e.preventDefault(); // Mencegah navigasi default  
+                
+                const targetSectionId = this.getAttribute('href').substring(1);  
+                const targetSection = document.getElementById(targetSectionId);  
+                
+                if (targetSection) {  
+                    // Scroll ke section yang dituju  
+                    targetSection.scrollIntoView({   
+                        behavior: 'smooth'   
+                    });  
+                    
+                    // Update active state  
+                    links.forEach(link => link.classList.remove('active'));  
+                    this.classList.add('active');  
+                    
+                    // Tutup menu mobile  
+                    const menu = document.getElementById('menu');  
+                    const burger = document.getElementById('burger');  
+                    menu.classList.remove('active');  
+                    burger.innerHTML = '<i class="fas fa-bars"></i>';  
+                }  
+            }  
+
+            function desktopHandler(e) {  
+                e.preventDefault();  
+
+                links.forEach(p => p.classList.remove('active'));  
+                this.classList.add('active');  
+
+                const newSectionIndex = parseInt(this.getAttribute('data-index'));  
+
+                if (window.innerWidth >= 1200) {  
+                    if (newSectionIndex !== currentSectionIndex) {  
+                        container.style.transform = `translateX(-${newSectionIndex * 100}vw)`;  
+                        currentSectionIndex = newSectionIndex;  
+                    }  
+                }  
+            }  
+
+            const burger = document.getElementById('burger');  
+            burger.onclick = () => {  
+                const menu = document.getElementById('menu');  
+                menu.classList.toggle('active');  
+                
+                if (menu.classList.contains('active')) {  
+                    burger.innerHTML = '<i class="fas fa-times"></i>';  
+                } else {  
+                    burger.innerHTML = '<i class="fas fa-bars"></i>';  
+                }  
+            };  
+
+            // Tambahkan event listener resize untuk update navigasi  
+            window.addEventListener('resize', () => {  
+                handleResponsiveNavigation();  
+            });  
+        }  
+
+        document.addEventListener('DOMContentLoaded', handleResponsiveNavigation);  
+    </script>  
+</body>  
+</html>
