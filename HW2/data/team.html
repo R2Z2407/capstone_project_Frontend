@@ -1,0 +1,144 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <title>Tim Persib Bandung</title>  
+    <style>  
+        body {  
+            font-family: Arial, sans-serif;  
+            margin: 0;  
+            padding: 20px;  
+            background-color: #f4f4f4;  
+        }  
+        .team-container {  
+            max-width: 1000px;  
+            margin: 0 auto;  
+            text-align: center;  
+        }  
+        #selected-player {  
+            background-color: white;  
+            border-radius: 10px;  
+            padding: 20px;  
+            margin-bottom: 20px;  
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);  
+            display: flex;  
+            align-items: center;  
+        }  
+        #selected-player img {  
+            width: 300px;  
+            height: 300px;  
+            object-fit: cover;  
+            margin-right: 20px;  
+            border-radius: 10px;  
+        }  
+        #player-details {  
+            text-align: left;  
+        }  
+        .player-list {  
+            display: flex;  
+            flex-wrap: wrap;  
+            gap: 10px;  
+            justify-content: center;  
+        }  
+        .player-thumbnail {  
+            width: 100px;  
+            height: 100px;  
+            object-fit: cover;  
+            border-radius: 10px;  
+            cursor: pointer;  
+            transition: transform 0.3s;  
+        }  
+        .player-thumbnail:hover {  
+            transform: scale(1.1);  
+        }  
+    </style>  
+</head>  
+<body>  
+    <div class="team-container">  
+        <div id="selected-player"></div>  
+        <div class="player-list" id="player-list"></div>  
+    </div>  
+
+    <script>  
+        // Data player akan diisi dari JSON  
+        const teamData = [];  
+
+        function displayPlayerDetails(player) {  
+            const selectedPlayerDiv = document.getElementById('selected-player');  
+            
+            // Fallback deskripsi jika kosong  
+            const description = player.description || 'Informasi pemain tidak tersedia.';  
+            
+            selectedPlayerDiv.innerHTML = `  
+                <img src="${player.player_image}" alt="${player.player_name}">  
+                <div id="player-details">  
+                    <h2>${player.player_name}</h2>  
+                    <p><strong>Posisi:</strong> ${player.position}</p>  
+                    <p><strong>Negara:</strong> ${player.country}</p>  
+                    <p>${description}</p>  
+                </div>  
+            `;  
+        }  
+
+        function createPlayerThumbnails(players) {  
+            const playerList = document.getElementById('player-list');  
+            playerList.innerHTML = ''; // Bersihkan daftar sebelumnya  
+            
+            players.forEach((player, index) => {  
+                const img = document.createElement('img');  
+                img.src = player.player_image;  
+                img.alt = player.player_name;  
+                img.classList.add('player-thumbnail');  
+                img.onclick = () => displayPlayerDetails(player);  
+                playerList.appendChild(img);  
+            });  
+
+            // Tampilkan pemain pertama secara default  
+            if (players.length > 0) {  
+                displayPlayerDetails(players[0]);  
+            }  
+        }  
+
+        // Fungsi untuk memproses data JSON  
+        function processTeamData(jsonData) {  
+            // Reset array  
+            teamData.length = 0;  
+
+            // Iterasi melalui semua objek di JSON  
+            Object.keys(jsonData).forEach(key => {  
+                const playerGroup = jsonData[key];  
+                Object.keys(playerGroup).forEach(playerKey => {  
+                    teamData.push(playerGroup[playerKey]);  
+                });  
+            });  
+
+            // Urutkan berdasarkan posisi  
+            const sortedPlayers = teamData.sort((a, b) => {  
+                const positionOrder = {  
+                    'GK': 1,  
+                    'CB': 2,  
+                    'LB': 3,  
+                    'RB': 4,  
+                    'DMF': 5,  
+                    'CMF': 6,  
+                    'AMF': 7,  
+                    'RW': 8,  
+                    'CF': 9  
+                };  
+                return (positionOrder[a.position] || 10) - (positionOrder[b.position] || 10);  
+            });  
+
+            // Buat thumbnail  
+            createPlayerThumbnails(sortedPlayers);  
+        }  
+
+        // Muat data JSON  
+        fetch('database_team.json')  
+            .then(response => response.json())  
+            .then(processTeamData)  
+            .catch(error => {  
+                console.error('Error memuat data:', error);  
+            });  
+    </script>  
+</body>  
+</html>

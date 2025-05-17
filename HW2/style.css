@@ -1,0 +1,389 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 0px;
+  background: transparent; /* Scrollbar sepenuhnya transparan */
+}
+
+*::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.5) transparent;
+  line-height: 1.6;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+
+body::-webkit-scrollbar {
+  width: 8px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+}
+
+body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+header {
+  background-color: #cccccc;
+  display: block;
+  width: 100%;
+  top: 0;
+  z-index: 10;
+}
+
+.BG {
+  background-color: blue;
+  height: 16vw;
+}
+
+.logo {
+  font-size: 24px;
+  height: 12vw;
+  width: 12vw;
+  display: block;
+  border-radius: 50%;
+  position: absolute;
+  top: 6vw;
+  left: 44%;
+  text-align: center;
+  background-color: grey;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+span {
+  height: 4vw;
+  display: block;
+}
+
+.burger {
+  font-size: 30px;
+  cursor: pointer;
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+}
+
+nav {
+  display: none;
+  background-color: #cccccc;
+  padding: 5px 0;
+  text-align: center;
+}
+
+nav.active {
+  display: block;
+}
+
+nav ul {
+  list-style-type: none;
+}
+
+nav ul li {
+  padding: 5px 0;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #000000;
+  display: block;
+  padding: 10px;
+  transition: all 0.3s ease;
+}
+
+nav ul li a:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+nav ul li a.active {
+  color: #ff0000;
+  font-weight: bold;
+  background-color: white;
+}
+
+section {
+  padding: 20px;
+  height: auto;
+  background-color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.container {
+  height: calc(120vh - 100px);
+  overflow-y: auto;
+  transition: margin-top 0.3s ease;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.container::-webkit-scrollbar {
+  display: none;
+}
+/*Team*/
+#big-menu {
+  width: 100%;
+  text-align: center;
+  background-color: transparent;
+}
+#big-menu img {
+  width: 320px;
+  height: 400px;
+}
+#list-player {
+  margin-top: 2vh;
+  width: 100%;
+  height: auto;
+  padding: 10px;
+  background-color: transparent;
+  border-top: 0.2vh ridge black;
+  border-bottom: 0.2vh ridge black;
+}
+
+/* Container List Player */
+#list-player {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  scrollbar-width: thin; /* Dukungan Firefox */
+  scrollbar-color: #888 #f1f1f1; /* Warna scrollbar */
+}
+
+/* Scrollbar untuk browser webkit */
+#list-player::-webkit-scrollbar {
+  width: 8px;
+}
+
+#list-player::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+#list-player::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+/* Gallery Slider */
+.gallery-slider {
+  display: flex;
+  gap: 10px; /* Spasi antar slide */
+  transition: transform 0.5s ease;
+  padding: 10px 0; /* Tambah sedikit padding vertikal */
+}
+
+.gallery-slider .slide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  flex-shrink: 0; /* Mencegah slide menyusut */
+}
+
+.gallery-slider .slide img {
+  width: 107px; /* Sedikit lebih besar */
+  height: 134px; /* Sedikit lebih tinggi */
+  object-fit: cover;
+  object-position: top center;
+  border-radius: 10px; /* Sudut membulat */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Efek bayangan ringan */
+  transition: all 0.3s ease;
+}
+
+.gallery-slider .slide img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* Bayangan lebih jelas saat hover */
+}
+
+.gallery-slider .slide .player-name {
+  margin-top: 10px;
+  font-weight: bold;
+  font-size: 0.9rem;
+  color: #333;
+  max-width: 150px; /* Batasi lebar nama */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; /* Tampilkan elipsis jika nama terlalu panjang */
+}
+
+/* Navigasi Slider */
+.slider-navigation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5px;
+  gap: 20px; /* Spasi antar tombol */
+}
+
+.slider-navigation button {
+  background-color: #f1f1f1;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  color: #333;
+}
+
+.slider-navigation button:hover {
+  background-color: #e0e0e0;
+  transform: scale(1.05);
+}
+
+.slider-navigation button:active {
+  transform: scale(0.95);
+  background-color: #d0d0d0;
+}
+
+@media screen and (min-width: 1200px) {
+  body {
+    overflow-x: hidden;
+  }
+
+  .BG {
+    height: 10vw;
+  }
+
+  .burger {
+    display: none;
+  }
+
+  header {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 25vw;
+  }
+
+  .BG {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 15vw;
+    background-color: #f0f0f0;
+    z-index: 1;
+  }
+
+  .logo {
+    position: absolute;
+    top: 7vw;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 15vw;
+    height: 15vw;
+    border-radius: 50%;
+    background-color: #808080;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    color: white;
+    font-weight: bold;
+    font-size: 2vw;
+  }
+
+  nav {
+    position: absolute;
+    bottom: -1.3vw;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    z-index: 2;
+    background-color: transparent;
+  }
+
+  nav ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: 5vw;
+    background-color: transparent;
+    justify-content: center;
+    width: 50%;
+  }
+
+  nav ul li a {
+    text-decoration: none;
+    color: black;
+    padding: 1vw 2vw;
+    font-size: 1.2vw;
+    transition: all 0.3s ease;
+    background-color: transparent;
+  }
+
+  nav ul li a:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+
+  nav ul li a.active {
+    background-color: white;
+    color: red;
+    border-radius: 2vw 2vw 0 0;
+    padding: 1vw 2vw;
+  }
+
+  .container {
+    display: flex;
+    height: calc(100vh - 10vh);
+    margin-top: 0;
+    transition: transform 0.5s ease-in-out;
+    width: 400vw;
+    overflow-y: hidden;
+  }
+
+  section {
+    width: 100vw;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  /*Team*/
+  #big-menu {
+    width: 100%;
+    padding: 0 3%;
+    text-align: left;
+    display: flex;
+    gap: 2vw;
+  }
+  #big-menu img {
+    width: 213px;
+    height: 267px;
+    background-color: #f0f0f0;
+  }
+  #big-menu div {
+    padding-top: 2%;
+  }
+  #list-player {
+    margin-top: 4vh;
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+  }
+}
