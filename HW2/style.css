@@ -43,15 +43,15 @@ body::-webkit-scrollbar-track {
 }
 
 header {
-  background-color: #cccccc;
   display: block;
+  background-color: #3360b4;
   width: 100%;
   top: 0;
   z-index: 10;
 }
 
 .BG {
-  background-color: blue;
+  background-image: url("images/GBLA.jpeg");
   height: 16vw;
 }
 
@@ -65,11 +65,33 @@ header {
   top: 6vw;
   left: 44%;
   text-align: center;
-  background-color: grey;
   color: white;
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden; /* Potong gambar yang melebihi wadah */
+}
+.logo img {  
+  width: 100%;  
+  height: 100%;  
+  object-fit: contain;  
+  object-position: center;  
+  
+  /* Efek kaca */  
+  transition: all 0.3s ease;  
+  filter: brightness(0.9) contrast(1.2);  
+  
+  /* Efek refleksi */  
+  box-shadow:   
+    0 0 10px rgba(255,255,255,0.3),  
+    inset 0 0 15px rgba(255,255,255,0.5);  
+}  
+
+.logo img:hover {  
+  filter: brightness(1.1) contrast(1.3);  
+  box-shadow:   
+    0 0 15px rgba(255,255,255,0.5),  
+    inset 0 0 20px rgba(255,255,255,0.7);  
 }
 
 span {
@@ -83,11 +105,11 @@ span {
   display: block;
   margin: 0 auto;
   text-align: center;
+  color: #f3e11c;
 }
 
 nav {
   display: none;
-  background-color: #cccccc;
   padding: 5px 0;
   text-align: center;
 }
@@ -106,7 +128,7 @@ nav ul li {
 
 nav ul li a {
   text-decoration: none;
-  color: #000000;
+  color: white;
   display: block;
   padding: 10px;
   transition: all 0.3s ease;
@@ -117,9 +139,8 @@ nav ul li a:hover {
 }
 
 nav ul li a.active {
-  color: #ff0000;
+  color: white;
   font-weight: bold;
-  background-color: white;
 }
 
 section {
@@ -145,10 +166,15 @@ section {
   width: 100%;
   text-align: center;
   background-color: transparent;
+  ;
 }
 #big-menu img {
   width: 320px;
   height: 400px;
+}
+#big-menu p {
+  text-align: justify;
+  color: #18A950
 }
 #list-player {
   margin-top: 2vh;
@@ -169,22 +195,9 @@ section {
   scrollbar-color: #888 #f1f1f1; /* Warna scrollbar */
 }
 
-/* Scrollbar untuk browser webkit */
-#list-player::-webkit-scrollbar {
-  width: 8px;
-}
-
-#list-player::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
-
-#list-player::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 4px;
-}
-
 /* Gallery Slider */
 .gallery-slider {
+  margin-left: 2vw;
   display: flex;
   gap: 10px; /* Spasi antar slide */
   transition: transform 0.5s ease;
@@ -223,6 +236,17 @@ section {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis; /* Tampilkan elipsis jika nama terlalu panjang */
+  text-align: center;
+  line-height: 1.2;
+  word-wrap: break-word;
+  hyphens: auto;
+  overflow-wrap: break-word;
+}
+
+.gallery-slider .slide .player-name br {
+  content: "";
+  display: block;
+  margin-top: 2px;
 }
 
 /* Navigasi Slider */
@@ -255,6 +279,162 @@ section {
   background-color: #d0d0d0;
 }
 
+/*Gallery*/
+#big-gallery {
+  position: relative;
+  margin: 0 auto 30px;
+  overflow: hidden;
+  border-radius: 15px;
+}
+
+#big-gallery img {
+  width: 100%;
+  height: 480px;
+  border-radius: 15px;
+  object-fit: fill;
+  transition: transform 0.5s ease;
+}
+
+.gallery-title-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  padding: 15px;
+  font-size: 1.2rem;
+}
+
+#list-gallery {
+  max-width: 800px;
+  margin: 0 auto;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+/* Custom Scrollbar */
+#list-gallery::-webkit-scrollbar {
+  height: 8px;
+}
+
+#list-gallery::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+#list-gallery::-webkit-scrollbar-thumb {
+  background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+  border-radius: 10px;
+}
+
+#list-gallery::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(45deg, #ff4757, #2ed573);
+}
+
+.gallery-scroll {
+  display: flex;
+  gap: 15px;
+  padding: 15px;
+  scroll-snap-type: x mandatory;
+  overflow-x: scroll;
+  scroll-behavior: smooth;
+}
+
+.gallery-thumbnail {
+  flex: 0 0 150px;
+  height: 100px;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  scroll-snap-align: center;
+  transition: transform 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.gallery-thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.gallery-thumbnail:hover {
+  transform: scale(1.05);
+}
+
+.gallery-thumbnail.active {
+  border: 3px solid #4ecdc4;
+  transform: scale(1.05);
+}
+/*About*/
+:root {  
+    --primary-yellow: #F4ED25;    /* Kuning cerah */  
+    --primary-blue: #23439B;      /* Biru navy */  
+    --primary-green: #18A950;     /* Hijau emerald */  
+    --primary-dark-blue: #111A30; /* Biru gelap hampir hitam */  
+    --primary-cream: #FCFBD6;     /* Krem muda */  
+}  
+
+#about {  
+    background-color: var(--primary-cream);  
+    color: var(--primary-dark-blue);  
+    overflow: auto;
+}  
+
+.about-container {  
+    background-color: white;  
+    border-left: 5px solid var(--primary-blue);  
+    box-shadow: 0 4px 15px rgba(17, 26, 48, 0.1);  
+}  
+
+#about h1 {  
+    color: var(--primary-blue);  
+    border-bottom: 3px solid var(--primary-green);  
+}  
+
+.about-content h2,   
+.about-content h3 {  
+    color: var(--primary-blue);  
+}  
+
+.about-content p {  
+    color: var(--primary-dark-blue);  
+}  
+
+.about-content ul li {  
+    color: var(--primary-dark-blue);  
+    position: relative;  
+}  
+
+.about-content ul li::before {  
+    content: '•';  
+    color: var(--primary-green);  
+    font-weight: bold;  
+    display: inline-block;  
+    width: 1em;  
+    margin-left: -1em;  
+}  
+
+.closing-quote {  
+    color: var(--primary-blue);  
+    font-style: italic;  
+}  
+
+.final-line {  
+    color: var(--primary-green);  
+    font-weight: bold;  
+}  
+
+/* Hover dan interaksi */  
+a, .interactive-element {  
+    color: var(--primary-blue);  
+    transition: color 0.3s ease;  
+}  
+
+a:hover, .interactive-element:hover {  
+    color: var(--primary-green);  
+} 
 @media screen and (min-width: 1200px) {
   body {
     overflow-x: hidden;
@@ -294,7 +474,6 @@ section {
     width: 15vw;
     height: 15vw;
     border-radius: 50%;
-    background-color: #808080;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -327,20 +506,40 @@ section {
 
   nav ul li a {
     text-decoration: none;
-    color: black;
+    color: #f3e11c;
     padding: 1vw 2vw;
     font-size: 1.2vw;
+    position: relative;
+    overflow: hidden;
     transition: all 0.3s ease;
     background-color: transparent;
   }
 
-  nav ul li a:hover {
-    background-color: rgba(0, 0, 0, 0.1);
-  }
+  nav ul li a::before {  
+    content: "";  
+    position: absolute;  
+    top: 0;  
+    left: -100%;  
+    width: 100%;  
+    height: 84%; /* Pangkas bagian bawah sekitar 10% */  
+    background-color: #f3e11c;  
+    transition: left 0.3s ease;  
+    z-index: -1;  
+}  
+
+nav ul li a:hover::before {  
+    left: 0;  
+}  
+
+nav ul li a:hover {  
+    background-color: transparent;  
+    color: #18a950; 
+    border-radius: 2vw 2vw 0 0; 
+}
 
   nav ul li a.active {
     background-color: white;
-    color: red;
+    color: #3360b4;
     border-radius: 2vw 2vw 0 0;
     padding: 1vw 2vw;
   }
@@ -386,4 +585,14 @@ section {
     display: flex;
     flex-direction: column;
   }
+  #big-gallery {
+    position: relative;
+    margin: 0 auto 30px;
+    overflow: hidden;
+    border-radius: 15px;
+    box-shadow: 10px 0 30px black;
+  }
+  .about-container {  
+    margin-top: 57vh;  
+} 
 }
