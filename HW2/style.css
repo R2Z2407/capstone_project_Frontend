@@ -71,27 +71,11 @@ header {
   align-items: center;
   overflow: hidden; /* Potong gambar yang melebihi wadah */
 }
-.logo img {  
-  width: 100%;  
-  height: 100%;  
-  object-fit: contain;  
-  object-position: center;  
-  
-  /* Efek kaca */  
-  transition: all 0.3s ease;  
-  filter: brightness(0.9) contrast(1.2);  
-  
-  /* Efek refleksi */  
-  box-shadow:   
-    0 0 10px rgba(255,255,255,0.3),  
-    inset 0 0 15px rgba(255,255,255,0.5);  
-}  
-
-.logo img:hover {  
-  filter: brightness(1.1) contrast(1.3);  
-  box-shadow:   
-    0 0 15px rgba(255,255,255,0.5),  
-    inset 0 0 20px rgba(255,255,255,0.7);  
+.logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
 }
 
 span {
@@ -166,7 +150,6 @@ section {
   width: 100%;
   text-align: center;
   background-color: transparent;
-  ;
 }
 #big-menu img {
   width: 320px;
@@ -174,7 +157,7 @@ section {
 }
 #big-menu p {
   text-align: justify;
-  color: #18A950
+  color: #18a950;
 }
 #list-player {
   margin-top: 2vh;
@@ -368,73 +351,69 @@ section {
   transform: scale(1.05);
 }
 /*About*/
-:root {  
-    --primary-yellow: #F4ED25;    /* Kuning cerah */  
-    --primary-blue: #23439B;      /* Biru navy */  
-    --primary-green: #18A950;     /* Hijau emerald */  
-    --primary-dark-blue: #111A30; /* Biru gelap hampir hitam */  
-    --primary-cream: #FCFBD6;     /* Krem muda */  
-}  
+:root {
+  --primary-yellow: #f4ed25; /* Kuning cerah */
+  --primary-blue: #23439b; /* Biru navy */
+  --primary-green: #18a950; /* Hijau emerald */
+  --primary-dark-blue: #111a30; /* Biru gelap hampir hitam */
+  --primary-cream: #fcfbd6; /* Krem muda */
+}
+#about {
+  overflow: auto;
+  text-align: justify;
+}
 
-#about {  
-    background-color: var(--primary-cream);  
-    color: var(--primary-dark-blue);  
-    overflow: auto;
-}  
+#about h1 {
+  color: var(--primary-blue);
+  border-bottom: 3px solid var(--primary-green);
+}
 
-.about-container {  
-    background-color: white;  
-    border-left: 5px solid var(--primary-blue);  
-    box-shadow: 0 4px 15px rgba(17, 26, 48, 0.1);  
-}  
+.about-content h2,
+.about-content h3 {
+  color: var(--primary-blue);
+}
 
-#about h1 {  
-    color: var(--primary-blue);  
-    border-bottom: 3px solid var(--primary-green);  
-}  
+.about-content p {
+  color: var(--primary-dark-blue);
+}
 
-.about-content h2,   
-.about-content h3 {  
-    color: var(--primary-blue);  
-}  
+.about-content ul li {
+  color: var(--primary-dark-blue);
+  position: relative;
+  margin-left: 2vw;
+}
 
-.about-content p {  
-    color: var(--primary-dark-blue);  
-}  
+.about-content ul li::before {
+  content: "•";
+  color: transparent;
+  font-weight: bold;
+  display: inline-block;
+  width: 1em;
+  margin-left: -1em;
+}
 
-.about-content ul li {  
-    color: var(--primary-dark-blue);  
-    position: relative;  
-}  
+.closing-quote {
+  color: var(--primary-blue);
+  font-style: italic;
+}
 
-.about-content ul li::before {  
-    content: '•';  
-    color: var(--primary-green);  
-    font-weight: bold;  
-    display: inline-block;  
-    width: 1em;  
-    margin-left: -1em;  
-}  
+.final-line {
+  color: var(--primary-green);
+  font-weight: bold;
+  text-align: center;
+}
 
-.closing-quote {  
-    color: var(--primary-blue);  
-    font-style: italic;  
-}  
+/* Hover dan interaksi */
+a,
+.interactive-element {
+  color: var(--primary-blue);
+  transition: color 0.3s ease;
+}
 
-.final-line {  
-    color: var(--primary-green);  
-    font-weight: bold;  
-}  
-
-/* Hover dan interaksi */  
-a, .interactive-element {  
-    color: var(--primary-blue);  
-    transition: color 0.3s ease;  
-}  
-
-a:hover, .interactive-element:hover {  
-    color: var(--primary-green);  
-} 
+a:hover,
+.interactive-element:hover {
+  color: var(--primary-green);
+}
 @media screen and (min-width: 1200px) {
   body {
     overflow-x: hidden;
@@ -482,6 +461,19 @@ a:hover, .interactive-element:hover {
     font-weight: bold;
     font-size: 2vw;
   }
+  .logo img {
+    /* Efek kaca */
+    transition: all 0.3s ease;
+    filter: brightness(0.9) contrast(1.2);
+
+    /* Efek refleksi */
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3), inset 0 0 15px rgba(255, 255, 255, 0.5);
+  }
+
+  .logo img:hover {
+    filter: brightness(1.1) contrast(1.3);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5), inset 0 0 20px rgba(255, 255, 255, 0.7);
+  }
 
   nav {
     position: absolute;
@@ -515,27 +507,27 @@ a:hover, .interactive-element:hover {
     background-color: transparent;
   }
 
-  nav ul li a::before {  
-    content: "";  
-    position: absolute;  
-    top: 0;  
-    left: -100%;  
-    width: 100%;  
-    height: 84%; /* Pangkas bagian bawah sekitar 10% */  
-    background-color: #f3e11c;  
-    transition: left 0.3s ease;  
-    z-index: -1;  
-}  
+  nav ul li a::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 84%; /* Pangkas bagian bawah sekitar 10% */
+    background-color: #f3e11c;
+    transition: left 0.3s ease;
+    z-index: -1;
+  }
 
-nav ul li a:hover::before {  
-    left: 0;  
-}  
+  nav ul li a:hover::before {
+    left: 0;
+  }
 
-nav ul li a:hover {  
-    background-color: transparent;  
-    color: #18a950; 
-    border-radius: 2vw 2vw 0 0; 
-}
+  nav ul li a:hover {
+    background-color: transparent;
+    color: #18a950;
+    border-radius: 2vw 2vw 0 0;
+  }
 
   nav ul li a.active {
     background-color: white;
@@ -592,7 +584,19 @@ nav ul li a:hover {
     border-radius: 15px;
     box-shadow: 10px 0 30px black;
   }
-  .about-container {  
-    margin-top: 57vh;  
-} 
+  body {
+    background-image: url("images/GBLA.jpeg");
+  }
+  #about {
+  overflow: auto;
+  margin: 0 auto;
+  overflow: auto;
+  text-align: justify;
+  padding-top: 20vw;
+  max-width: 800px;
+  margin: 0 auto; /* Pusatkan kontainer */
+}
+  .about-container {
+    margin-top: 57vh;
+  }
 }
